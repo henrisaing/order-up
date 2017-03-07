@@ -37,8 +37,41 @@ class OrderController extends Controller
       'in_progress' => false,
       'ready' => false,
       'recieved' => false,
-      'status' => 'active',
+      'status' => 'pending',
     ]);
     return redirect('/orders');
   }
+
+  public function active(Order $order){
+    $order->update([
+      'in_progress' => true,
+      'status' => 'active'
+    ]);
+    return redirect('/orders');
+  }
+
+  public function pickUp(Order $order){
+    $order->update([
+      'ready' => true,
+      'status' => 'ready'
+    ]);
+    return redirect('/orders');
+  }
+
+  public function completed(Order $order){
+    $order->update([
+      'recieved' => true,
+      'status' => 'completed'
+    ]);
+    return redirect('/orders');
+  }
+
+  public function cancelled(Order $order){
+    $order->update([
+      'status' => 'cancelled'
+    ]);
+    return redirect('/orders');
+  }
+
+
 }
