@@ -4,7 +4,7 @@ $(document).ready(function(){
     $('#light').css('display','block');
 
     //get func attr
-    console.log($(this).attr('func'));
+    // console.log($(this).attr('func'));
     $.get($(this).attr('func'), function(data){
       $("#lightbox-content").html(data);
     });

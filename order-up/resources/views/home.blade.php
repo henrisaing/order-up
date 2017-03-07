@@ -9,8 +9,15 @@
 
                 <div class="panel-body">
                     You are logged in!
+                    
                     <a href="{{url('/items')}}">
                     {!! Form::button('Items',[
+                      'class' => 'btn btn-default',
+                    ]) !!}
+                    </a>
+
+                    <a href="{{url('/orders')}}">
+                    {!! Form::button('Orders',[
                       'class' => 'btn btn-default',
                     ]) !!}
                     </a>

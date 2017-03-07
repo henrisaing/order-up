@@ -23,6 +23,11 @@ Route::get('/item/{item}/edit', 'ItemController@edit');
 Route::post('/item/create', 'ItemController@create');
 Route::post('/item/{item}/update', 'ItemController@update');
 
+// orders
+Route::get('/orders', 'OrderController@index');
+Route::get('/order/new', 'OrderController@new');
+Route::post('/order/create', 'OrderController@create');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
