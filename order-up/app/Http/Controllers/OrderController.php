@@ -73,5 +73,9 @@ class OrderController extends Controller
     return redirect('/orders');
   }
 
-
+  public function pending(){
+    return view('orders.pending', [
+      'orders' =>     $orders = Auth::user()->orders()->get()
+    ]);
+  }
 }

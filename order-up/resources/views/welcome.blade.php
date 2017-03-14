@@ -5,18 +5,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Order Up</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
+                background-image:url('/img/food-table.jpg');
+                background-size:cover;
+                color: #000;
                 font-family: 'Raleway', sans-serif;
-                font-weight: 100;
+                font-weight: 300;
                 height: 100vh;
                 margin: 0;
             }
@@ -50,7 +52,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #000;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -62,9 +64,17 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .white-background{
+                background-color:rgba(200,200,200,0.6);
+                width:100%;
+                height:100%;
+                margin:0;
+                position:absolute;
+            }
         </style>
     </head>
     <body>
+        <div class="white-background"></div>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -79,15 +89,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Order Up
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    A small web-app for small businesses.
                 </div>
             </div>
         </div>

@@ -31,6 +31,7 @@ Route::post('/order/{order}/active', 'OrderController@active');
 Route::post('/order/{order}/pickup', 'OrderController@pickup');
 Route::post('/order/{order}/completed', 'OrderController@completed');
 Route::post('/order/{order}/cancel', 'OrderController@cancelled');
+Route::get('/orders/pending', 'OrderController@pending');
 
 Auth::routes();
 
