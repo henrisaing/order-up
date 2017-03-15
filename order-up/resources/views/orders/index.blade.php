@@ -16,44 +16,10 @@
       <!-- start Active orders -->
       <div class="panel panel-primary">
         <div class="panel-heading">Active Orders</div>
-        <div class="panel-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>name</th>
-                <th>items</th>
-                <th>notes</th>
-                <th>total</th>
-                <th></th>
-              </tr>
-            </thead>
+        <div class="panel-body" id="active">
+          @component('orders.active', ['orders' => $orders])
 
-            <tbody>
-              <?php foreach ($orders as $order): ?>
-                <?php if ($order->in_progress && $order->status == 'active'): ?>
-                <tr>
-                  <td>{{$order->name}}</td>
-                  <td>{{$order->items}}</td>
-                  <td>{{$order->notes}}</td>
-                  <td>{{$order->total}}</td>
-
-                  <td>
-                  <button class="btn btn-default send" type="button" func="/order/{{$order->id}}">paid</button>
-                  
-                  {!! Form::open(['url' => '/order/'.$order->id.'/pickup']) !!}
-                    <button class="btn btn-default" type="submit">ready</button>
-                  {!! Form::close() !!}
-
-                  {!! Form::open(['url' => '/order/'.$order->id.'/cancel']) !!}
-                    <button class="btn btn-danger" type="submit">cancel</button>
-                  {!! Form::close() !!}
-                  </td>
-                </tr>
-                  
-                <?php endif ?>
-              <?php endforeach ?>
-            </tbody>
-          </table>
+          @endcomponent
         </div>
       </div>
       <!-- end Active -->
@@ -89,7 +55,7 @@
                 <?php if ($order->ready && $order->status == 'ready'): ?>
                 <tr>
                   <td>{{$order->name}}</td>
-                  <td>{{$order->items}}</td>
+                  <td class="items">{{$order->items}}</td>
                   <td>{{$order->notes}}</td>
                   <td>{{$order->total}}</td>
 
@@ -97,7 +63,7 @@
                   <button class="btn btn-default send" type="button" func="/order/{{$order->id}}">paid</button>
                   
                   {!! Form::open(['url' => '/order/'.$order->id.'/completed']) !!}
-                    <button class="btn btn-default" type="submit" >recieved</button>
+                    <button class="btn btn-success" type="submit" >recieved</button>
                   {!! Form::close() !!}
 
                   {!! Form::open(['url' => '/order/'.$order->id.'/cancel']) !!}
@@ -134,7 +100,7 @@
                 <?php if ($order->recieved && $order->status == 'completed'): ?>
                 <tr>
                   <td>{{$order->name}}</td>
-                  <td>{{$order->items}}</td>
+                  <td class="items">{{$order->items}}</td>
                   <td>{{$order->notes}}</td>
                   <td>{{$order->total}}</td>
 
@@ -199,12 +165,15 @@
 </div>
 
 <script type="text/javascript">
-    var pending = setInterval(getPending, 5000);
+    var pending = setInterval(update, 10000);
 
-    function getPending(){
-    $.get('/orders/pending', function(data){
-      $('#pending').html(data);
-    });
+    function update(){
+      $.get('/orders/pending', function(data){
+        $('#pending').html(data);
+      });
+      $.get('/orders/active', function(data){
+        $('#active').html(data);
+      });
     }
 </script>
 @endsection

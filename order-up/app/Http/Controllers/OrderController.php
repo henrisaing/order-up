@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Order;
 use App\Item;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -28,11 +29,13 @@ class OrderController extends Controller
   }
 
   public function create(Request $request){
+    $items = Order::items($request->input('items'));
+    $total = Order::total($request->input('items'));
     Auth::user()->orders()->create([
       'name' => $request->name,
       'notes' => $request->notes,
-      'items' => 'item placeholder',
-      'total' => 'total placeholder',
+      'items' => $items,
+      'total' => $total,
       'paid' => false,
       'in_progress' => false,
       'ready' => false,
@@ -75,7 +78,15 @@ class OrderController extends Controller
 
   public function pending(){
     return view('orders.pending', [
-      'orders' =>     $orders = Auth::user()->orders()->get()
+      'orders' => $orders = Auth::user()->orders()->get()
     ]);
   }
+
+  public function getActive(){
+    return view('orders.active', [
+      'orders' => $orders = Auth::user()->orders()->get()
+    ]);
+  }
+
+  
 }

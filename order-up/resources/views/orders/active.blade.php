@@ -1,4 +1,3 @@
-<!-- start Pending orders -->
 <table class="table">
   <thead>
     <tr>
@@ -12,7 +11,7 @@
 
   <tbody>
     <?php foreach ($orders as $order): ?>
-      <?php if ($order->in_progress == false && $order->status == 'pending'): ?>
+      <?php if ($order->in_progress && $order->status == 'active'): ?>
       <tr>
         <td>{{$order->name}}</td>
         <td class="items">{{$order->items}}</td>
@@ -21,9 +20,9 @@
 
         <td>
         <button class="btn btn-default send" type="button" func="/order/{{$order->id}}">paid</button>
-
-        {!! Form::open(['url' => '/order/'.$order->id.'/active']) !!}
-          <button class="btn btn-info" type="submit">seen it</button>
+        
+        {!! Form::open(['url' => '/order/'.$order->id.'/pickup']) !!}
+          <button class="btn btn-success" type="submit">ready</button>
         {!! Form::close() !!}
 
         {!! Form::open(['url' => '/order/'.$order->id.'/cancel']) !!}
@@ -36,5 +35,3 @@
     <?php endforeach ?>
   </tbody>
 </table>
-
-<!-- end Pending -->

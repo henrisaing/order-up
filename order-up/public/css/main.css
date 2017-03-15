@@ -44,3 +44,8 @@ a.lightbox-close{
 .hide{
   display:none;
 }
+
+.items{
+  font-size:2em;
+  font-weight:strong;
+}
