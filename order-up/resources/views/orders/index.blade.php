@@ -39,43 +39,9 @@
       <div class="panel panel-info">
         <div class="panel-heading">Pickup Ready</div>
         <div class="panel-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>name</th>
-                <th>items</th>
-                <th>notes</th>
-                <th>total</th>
-                <th></th>
-              </tr>
-            </thead>
+          @component('orders.ready', ['orders' => $orders])
 
-            <tbody>
-              <?php foreach ($orders as $order): ?>
-                <?php if ($order->ready && $order->status == 'ready'): ?>
-                <tr>
-                  <td>{{$order->name}}</td>
-                  <td class="items">{{$order->items}}</td>
-                  <td>{{$order->notes}}</td>
-                  <td>{{$order->total}}</td>
-
-                  <td>
-                  <button class="btn btn-default send" type="button" func="/order/{{$order->id}}">paid</button>
-                  
-                  {!! Form::open(['url' => '/order/'.$order->id.'/completed']) !!}
-                    <button class="btn btn-success" type="submit" >recieved</button>
-                  {!! Form::close() !!}
-
-                  {!! Form::open(['url' => '/order/'.$order->id.'/cancel']) !!}
-                    <button class="btn btn-danger" type="submit">cancel</button>
-                  {!! Form::close() !!}
-                  </td>
-                </tr>
-                  
-                <?php endif ?>
-              <?php endforeach ?>
-            </tbody>
-          </table>
+          @endcomponent
         </div>
       </div>
       <!-- end completed -->    
@@ -96,7 +62,7 @@
             </thead>
 
             <tbody>
-              <?php foreach ($orders->reverse() as $order): ?>
+              <?php foreach ($orders as $order): ?>
                 <?php if ($order->recieved && $order->status == 'completed'): ?>
                 <tr>
                   <td>{{$order->name}}</td>
@@ -106,9 +72,6 @@
 
                   <td>
                   <button class="btn btn-default send" type="button" func="/order/{{$order->id}}">paid</button>
-                  <button class="btn btn-default send" type="button" func="/order/{{$order->id}}">seen it</button>
-                  <button class="btn btn-default send" type="button" func="/order/{{$order->id}}">ready</button>
-                  <button class="btn btn-default send" type="button" ffunc="/order/{{$order->id}}">recieved</button>
                   </td>
                 </tr>
                   
@@ -136,7 +99,7 @@
             </thead>
 
             <tbody>
-              <?php foreach ($orders->reverse() as $order): ?>
+              <?php foreach ($orders as $order): ?>
                 <?php if ($order->status == 'cancelled'): ?>
                 <tr>
                   <td>{{$order->name}}</td>
@@ -146,9 +109,6 @@
 
                   <td>
                   <button class="btn btn-default send" type="button" func="/order/{{$order->id}}">paid</button>
-                  <button class="btn btn-default send" type="button" func="/order/{{$order->id}}">seen it</button>
-                  <button class="btn btn-default send" type="button" func="/order/{{$order->id}}">ready</button>
-                  <button class="btn btn-default send" type="button" ffunc="/order/{{$order->id}}">recieved</button>
                   </td>
                 </tr>
                   

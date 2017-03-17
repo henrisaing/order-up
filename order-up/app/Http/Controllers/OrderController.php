@@ -13,7 +13,8 @@ class OrderController extends Controller
     //
 
   public function index(){
-    $orders = Auth::user()->orders()->get();
+    // $orders = Auth::user()->orders()->get();
+    $orders = Auth::user()->orders()->where('created_at', '>', Carbon::now()->subDay())->get();
     return view('orders.index', [
       'orders' => $orders,
     ]);
@@ -78,13 +79,19 @@ class OrderController extends Controller
 
   public function pending(){
     return view('orders.pending', [
-      'orders' => $orders = Auth::user()->orders()->get()
+      'orders' => Auth::user()->orders()->where('created_at', '>', Carbon::now()->subDay())->get()
     ]);
   }
 
   public function getActive(){
     return view('orders.active', [
-      'orders' => $orders = Auth::user()->orders()->get()
+      'orders' => $orders = Auth::user()->orders()->where('created_at', '>', Carbon::now()->subDay())->get()
+    ]);
+  }
+
+  public function getReady(){
+    return view('orders.active', [
+      'orders' => $orders = Auth::user()->orders()->where('created_at', '>', Carbon::now()->subDay())->get()
     ]);
   }
 
