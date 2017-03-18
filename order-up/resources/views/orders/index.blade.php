@@ -67,9 +67,9 @@
                   <?php if ($order->paid): ?>
                     <tr class="success">
                   <?php else: ?>
-                    <tr class="warning">
+                    <tr class="danger">
                   <?php endif; ?>
-                  
+
                   <td>{{$order->name}}</td>
                   <td class="items">{{$order->items}}</td>
                   <td>{{$order->notes}}</td>
@@ -107,9 +107,9 @@
               <?php foreach ($orders as $order): ?>
                 <?php if ($order->status == 'cancelled'): ?>
                 <?php if ($order->paid): ?>
-                  <tr class="success">
-                <?php else: ?>
                   <tr class="warning">
+                <?php else: ?>
+                  <tr class="success">
                 <?php endif; ?>
                   <td>{{$order->name}}</td>
                   <td>{{$order->items}}</td>
