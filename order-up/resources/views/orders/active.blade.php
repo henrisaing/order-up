@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-responsive">
   <thead>
     <tr>
       <th>name</th>
@@ -12,14 +12,22 @@
   <tbody>
     <?php foreach ($orders as $order): ?>
       <?php if ($order->in_progress && $order->status == 'active'): ?>
-      <tr>
+      <?php if ($order->paid): ?>
+        <tr class="success">
+      <?php else: ?>
+        <tr class="warning">
+      <?php endif; ?>
         <td>{{$order->name}}</td>
         <td class="items">{{$order->items}}</td>
         <td>{{$order->notes}}</td>
         <td>{{$order->total}}</td>
 
         <td>
-        <button class="btn btn-default send" type="button" func="/order/{{$order->id}}">paid</button>
+        {!! Form::open(['url' => '/order/'.$order->id.'/paid']) !!}
+          <button class="btn btn-success" type="submit">
+            paid
+          </button>
+        {!! Form::close() !!}
         
         {!! Form::open(['url' => '/order/'.$order->id.'/pickup']) !!}
           <button class="btn btn-success" type="submit">ready</button>

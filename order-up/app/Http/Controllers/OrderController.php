@@ -46,6 +46,13 @@ class OrderController extends Controller
     return redirect('/orders');
   }
 
+  public function paid(Order $order){
+    $order->update([
+      'paid' => true,
+    ]);
+    return redirect('/orders');
+  }
+
   public function active(Order $order){
     $order->update([
       'in_progress' => true,
@@ -90,7 +97,7 @@ class OrderController extends Controller
   }
 
   public function getReady(){
-    return view('orders.active', [
+    return view('orders.ready', [
       'orders' => $orders = Auth::user()->orders()->where('created_at', '>', Carbon::now()->subDay())->get()
     ]);
   }

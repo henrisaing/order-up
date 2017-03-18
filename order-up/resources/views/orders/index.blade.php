@@ -38,7 +38,7 @@
       <!-- start pickup orders -->
       <div class="panel panel-info">
         <div class="panel-heading">Pickup Ready</div>
-        <div class="panel-body">
+        <div class="panel-body" id="ready">
           @component('orders.ready', ['orders' => $orders])
 
           @endcomponent
@@ -50,7 +50,7 @@
       <div class="panel panel-success">
         <div class="panel-heading">Completed Orders</div>
         <div class="panel-body">
-          <table class="table">
+          <table class="table table-responsive">
             <thead>
               <tr>
                 <th>name</th>
@@ -64,7 +64,12 @@
             <tbody>
               <?php foreach ($orders as $order): ?>
                 <?php if ($order->recieved && $order->status == 'completed'): ?>
-                <tr>
+                  <?php if ($order->paid): ?>
+                    <tr class="success">
+                  <?php else: ?>
+                    <tr class="warning">
+                  <?php endif; ?>
+                  
                   <td>{{$order->name}}</td>
                   <td class="items">{{$order->items}}</td>
                   <td>{{$order->notes}}</td>
@@ -87,7 +92,7 @@
       <div class="panel panel-danger">
         <div class="panel-heading">Cancelled Orders</div>
         <div class="panel-body">
-          <table class="table">
+          <table class="table table-responsive">
             <thead>
               <tr>
                 <th>name</th>
@@ -101,7 +106,11 @@
             <tbody>
               <?php foreach ($orders as $order): ?>
                 <?php if ($order->status == 'cancelled'): ?>
-                <tr>
+                <?php if ($order->paid): ?>
+                  <tr class="success">
+                <?php else: ?>
+                  <tr class="warning">
+                <?php endif; ?>
                   <td>{{$order->name}}</td>
                   <td>{{$order->items}}</td>
                   <td>{{$order->notes}}</td>
@@ -133,6 +142,9 @@
       });
       $.get('/orders/active', function(data){
         $('#active').html(data);
+      });
+      $.get('/orders/ready', function(data){
+        $('#ready').html(data);
       });
     }
 </script>
