@@ -49,3 +49,16 @@ a.lightbox-close{
   font-size:2em;
   font-weight:strong;
 }
+
+@media (max-width: 480px){
+  .white_content {
+    top:5%;
+    left:5%;
+    width:90%;
+    height:90%;
+  }
+
+  .items{
+    font-size:1.2em;
+  }
+}
